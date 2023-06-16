@@ -1,7 +1,7 @@
-# 🍕 React Pizza v2 (REMASTERED) 🍕
+# 🍕 React Pizza v2 🍕
 # 🛠 Технологии:
 
-- **ReactJS 18 & Vite**
+- **ReactJS 18**
 - **TypeScript**
 - **Redux Toolkit** (хранение данных / пицц)
 - **React Router v6** (навигация)
