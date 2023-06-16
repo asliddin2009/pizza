@@ -7,12 +7,11 @@ import identity from 'lodash/identity';
 export const fetchPizzas = createAsyncThunk<Pizza[], SearchPizzaParams>(
   'pizza/fetchPizzasStatus',
   async (params) => {
-    const { sortBy, order, category, search, currentPage } = params;
-    console.log(params, 4444);
-    const { data } = await axios.get<Pizza[]>(`https://626d16545267c14d5677d9c2.mockapi.io/items`, {
+    const { sortBy, order, category, search } = params;
+    // console.log(params, 4444);
+    const { data } = await axios.get<Pizza[]>(`https://647d8b3faf9847108549d46e.mockapi.io/items`, {
       params: pickBy(
         {
-          page: currentPage,
           limit: 4,
           category,
           sortBy,

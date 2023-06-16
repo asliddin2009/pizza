@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSort } from '../redux/filter/slice';
 import { Sort as SortType, SortPropertyEnum } from '../redux/filter/types';
@@ -6,10 +6,6 @@ import { Sort as SortType, SortPropertyEnum } from '../redux/filter/types';
 type SortItem = {
   name: string;
   sortProperty: SortPropertyEnum;
-};
-
-type PopupClick = MouseEvent & {
-  path: Node[];
 };
 
 type SortPopupProps = {
@@ -37,18 +33,22 @@ export const Sort: React.FC<SortPopupProps> = React.memo(({ value }) => {
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const _event = event as PopupClick;
+  const handleClickOutside = (event: MouseEvent) => {
+    if ((event.target as HTMLElement).parentNode?.parentNode !== sortRef.current) {
+      setOpen(false);
+    }
+  };
 
-      if (sortRef.current && !_event.path.includes(sortRef.current)) {
-        setOpen(false);
-      }
-    };
+  document.body.addEventListener('click', handleClickOutside as EventListener);
 
-    document.body.addEventListener('click', handleClickOutside);
+  return () => {
+    document.body.removeEventListener('click', handleClickOutside as EventListener);
+  };
+}, []);
 
-    return () => document.body.removeEventListener('click', handleClickOutside);
-  }, []);
+  
+  
+  
 
   return (
     <div ref={sortRef} className="sort">
@@ -83,4 +83,4 @@ export const Sort: React.FC<SortPopupProps> = React.memo(({ value }) => {
       )}
     </div>
   );
-});
+})

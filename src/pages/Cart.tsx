@@ -6,6 +6,7 @@ import { CartItem, CartEmpty } from '../components';
 
 import { selectCart } from '../redux/cart/selectors';
 import { clearItems } from '../redux/cart/slice';
+import { CartItem as CartItemType } from '../redux/cart/types';
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ const Cart: React.FC = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item: any) => (
+          {items.map((item: CartItemType) => (
             <CartItem key={item.id} {...item} />
           ))}
         </div>

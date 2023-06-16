@@ -19,7 +19,7 @@ export const Search: React.FC = () => {
   const updateSearchValue = React.useCallback(
     debounce((str: string) => {
       dispatch(setSearchValue(str));
-    }, 150),
+    }, 200),
     [],
   );
 

@@ -235,6 +235,7 @@ body {
         &:disabled {
           opacity: 0.4;
           border-color: #787878;
+          cursor: auto;
 
           &:active {
             transform: none;

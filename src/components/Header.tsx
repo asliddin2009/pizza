@@ -5,13 +5,23 @@ import { useSelector } from 'react-redux';
 import logoSvg from '../assets/img/pizza-logo.svg';
 import { Search } from './';
 import { selectCart } from '../redux/cart/selectors';
+import { selectFilter } from '../redux/filter/selectors';
+import { setCategoryId } from '../redux/filter/slice';
+import { useAppDispatch } from '../redux/store';
+import { CartItem } from '../redux/cart/types';
 
 export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const location = useLocation();
   const isMounted = React.useRef(false);
+  const dispatch = useAppDispatch();
+  const { categoryId } = useSelector(selectFilter);
 
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const setCategoryHandler = () => {
+    dispatch(setCategoryId(0))
+  }
+
+  const totalCount = items.reduce((sum: number, item: CartItem) => sum + item.count, 0);
 
   React.useEffect(() => {
     if (isMounted.current) {
@@ -24,7 +34,7 @@ export const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="container">
-        <Link to="/">
+        <Link onClick={() => setCategoryHandler()} to="/">
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>

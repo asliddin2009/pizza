@@ -19,7 +19,6 @@ export type SearchPizzaParams = {
   order: string;
   category: string;
   search: string;
-  currentPage: string;
 };
 
 export interface PizzaSliceState {
